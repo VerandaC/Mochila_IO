@@ -1,4 +1,6 @@
 from tkinter import*
+from tkinter import filedialog as fd
+import os
 from nuevo_problema import *
 
 class menu_problema:
@@ -7,6 +9,23 @@ class menu_problema:
         def nuevo():
             v.destroy()
             nuevo=nuevo_problema()
+
+        def guardar():
+            nombre_archivo=fd.asksaveasfilename(initialdir = os.getcwd() ,title = "Guardar como",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))
+            if nombre_archivo!='':
+                archivo=open(nombre_archivo + ".txt", "w", encoding="utf-8")
+                archivo.write(self.scrolledtext1.get("1.0", END))
+                archivo.close()
+               
+
+        def recuperar():
+            nombre_archivo=fd.askopenfilename(initialdir = os.getcwd() ,title = "Seleccione archivo",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))
+            if nombre_archivo!='':
+                archivo=open(nombre_archivo, "r", encoding="utf-8")
+                contenido=archivo.read()
+                archivo.close()
+                self.scrolledtext1.delete("1.0", END) 
+                self.scrolledtext1.insert("1.0", contenido)
 
         # Creacion de la barra de menus
         barra_menu = Menu(v)
@@ -18,8 +37,8 @@ class menu_problema:
 
         # Creacion de los comandos para menu archivo
         archivo.add_command(label="Nuevo Problema", command=nuevo)
-        archivo.add_command(label="Cargar problema")
-        archivo.add_command(label="Guardar")
+        archivo.add_command(label="Cargar problema",command=recuperar)
+        archivo.add_command(label="Guardar", command=guardar)
         archivo.add_separator()
         archivo.add_command(label="Salir")
 
@@ -39,3 +58,5 @@ class menu_problema:
         
         # Agregar la barra a principal
         v.config(menu=barra_menu)
+
+        

@@ -7,7 +7,12 @@ class nuevo_problema:
     def __init__(self):
         # Creacion de la ventana nuevo problema
         self.ventana = Tk()
-        self.ventana.geometry("500x200+0+0")
+        ancho=450
+        alto=150
+        x=self.ventana.winfo_screenwidth()// 2 - ancho // 2
+        y=self.ventana.winfo_screenheight()// 2 - alto // 2
+        self.ventana.geometry(f'{ancho}x{alto}+{x}+{y}')
+        self.ventana.resizable(0,0)
         self.ventana.title("Nuevo problema")
 
         #Etiqueta capacidad
@@ -21,12 +26,12 @@ class nuevo_problema:
 
         #Etiqueta cantidad
         self.etiqueta_cantidad=Label(self.ventana, text="Cantidad de articulos a asignar")
-        self.etiqueta_cantidad.grid(column=0,row=3,padx=4,pady=4)
+        self.etiqueta_cantidad.grid(column=0,row=0,padx=4,pady=4)
         
         #Caja de texto cantidad
         self.caja_cantidad=IntVar()
         self.texto_cantidad=Entry(self.ventana, textvariable= self.caja_cantidad)
-        self.texto_cantidad.grid(column=1,row=3,padx=4,pady=4)
+        self.texto_cantidad.grid(column=1,row=0,padx=4,pady=4)
 
         #Boton ok
         self.ok=Button(self.ventana, text="OK",command=self.generar_ingreso_datos)
