@@ -1,5 +1,5 @@
 from tkinter import *
-from ingreso_datos import ingreso_datos
+from .ingreso_datos import ingreso_datos
 # from principal import principal
 
 class nuevo_problema:

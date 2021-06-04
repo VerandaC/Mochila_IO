@@ -1,6 +1,9 @@
 from tkinter import *
-from menu_problema import menu_problema
-from resultado import solucion
+from .menu_problema import menu_problema
+from .resultado import resultado
+
+from .Solucion.Mochila import Mochila
+from .Solucion.Item import Item
 
 
 class ingreso_datos:
@@ -46,7 +49,8 @@ class ingreso_datos:
         
 
         #Boton correr
-        self.ok=Button(self.ventana, text="Correr",command=self.get_datos_tabla,bg="lavender")
+        # self.ok=Button(self.ventana, text="Correr",command=self.get_datos_tabla,bg="lavender")
+        self.ok=Button(self.ventana, text="Correr",command=self.solucionar_problema,bg="lavender")
         self.ok.pack(side=RIGHT,padx=70,pady=15)
 
 
@@ -60,7 +64,7 @@ class ingreso_datos:
             for c in range(0, 3):
                 celda = Entry(self.matriz_problema, width=12)
                 celda.grid(padx=5, pady=5, row=r, column=c)
-                celda.insert(0, '({}, {})'.format(r, c))
+                # celda.insert(0, '({}, {})'.format(r, c))
                 celda.config(fg="white",    # letras
                             bg="skyblue",   # fondo
                             font=("Verdana",12))
@@ -68,27 +72,43 @@ class ingreso_datos:
             self.matriz.append(fila)
 
     
-    def generar_ventana_solucion(self):
+    def generar_ventana_solucion(self, soluciones, pesos, utilidad):
         print("self cantidad ",self.cant)
-        solucion(4,self.cant,4,8)
+        resultado(self.cant, soluciones, pesos, utilidad)
         
-    
-    
-    
     def get_datos_tabla(self):
         nombres = []
         pesos = []
         utilidades = []
         for fila in self.matriz:
             nombres.append(fila[0].get())
-            pesos.append(fila[1].get())
-            utilidades.append(fila[2].get())
+            pesos.append(int(fila[1].get()))
+            utilidades.append(int(fila[2].get()))
+        return nombres, pesos, utilidades
 
-        print('Nombres: ', nombres)
-        print('Pesos: ', pesos)
-        print('Utilidades: ', utilidades)
-        print('SOLUCION DEL PROBLEMA')
-        self.generar_ventana_solucion()
+    def auto_completar(self):
+        nom = ('producto 1', 'producto 2', 'producto 3')
+        pe = ('12', '5', '7')
+        uti = ('4', '2', '1')
+        for i, fila in enumerate(self.matriz):
+            fila[0].insert(0,nom[i])
+            fila[1].insert(0,pe[i])
+            fila[2].insert(0,uti[i])
+
+    def solucionar_problema(self):
+        self.auto_completar()
+        nombres, pesos, utilidades = self.get_datos_tabla()
+        items = []
+        for n, p, u in zip(nombres, pesos, utilidades):
+            items.append(Item(n, p, u))
+        mochila = Mochila(self.cap, items)
+        mochila.crear_etapas()
+        mochila.resolver()
+        soluciones = mochila.get_soluciones()
+        pesos_sol = mochila.get_pesos_sol()
+        utilidad_sol = mochila.get_utilidad_neta()
+
+        self.generar_ventana_solucion(soluciones, pesos_sol, utilidad_sol)
 
 #Creacion de otras Ventanas
     def cancelar(self):

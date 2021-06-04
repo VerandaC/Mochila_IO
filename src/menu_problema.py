@@ -1,7 +1,7 @@
 from tkinter import*
 from tkinter import filedialog as fd
 import os
-from nuevo_problema import *
+from .nuevo_problema import *
 
 class menu_problema:
     def __init__(self,v):
