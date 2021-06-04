@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog as fd
 import os
 from .nuevo_problema import nuevo_problema
+from .menu_problema import menu_problema
 
 class principal:
     def __init__(self):
@@ -22,21 +23,21 @@ class principal:
         # Creacion de la barra de menus
         self.barra_menu = Menu(self.principal)
 
-        # Creacion de menus
+        # # Creacion de menus
         self.archivo = Menu(self.barra_menu)
         self.acerca_de = Menu(self.barra_menu)
 
-        # Creacion de los comandos para menu archivo
+        # # Creacion de los comandos para menu archivo
         self.archivo.add_command(label="Nuevo Problema", command=self.abrir_nuevo)
         self.archivo.add_command(label="Cargar problema", command= self.recuperar)
         self.archivo.add_command(label="Guardar", command=self.guardar)
         self.archivo.add_command(label="Salir")
 
-        # Agregar los menus a la barra de menus
+        # # Agregar los menus a la barra de menus
         self.barra_menu.add_cascade(label="Archivo", menu=self.archivo)
         self.barra_menu.add_cascade(label="Acerca de", menu=self.acerca_de)
 
-        # Agregar la barra a principal
+        # # Agregar la barra a principal
         self.principal.config(menu=self.barra_menu)
 
         self.principal.mainloop()

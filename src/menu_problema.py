@@ -1,14 +1,15 @@
 from tkinter import*
 from tkinter import filedialog as fd
 import os
-from .nuevo_problema import *
+# from .nuevo_problema import nuevo_problema
 
 class menu_problema:
     def __init__(self,v):
+        print('NOMBRE VENTANA:', v)
         #Creacion de otras Ventanas
         def nuevo():
             v.destroy()
-            nuevo=nuevo_problema()
+            # nuevo=nuevo_problema()
 
         def guardar():
             nombre_archivo=fd.asksaveasfilename(initialdir = os.getcwd() ,title = "Guardar como",filetypes = (("txt files","*.txt"),("todos los archivos","*.*")))

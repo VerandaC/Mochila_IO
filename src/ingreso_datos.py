@@ -33,8 +33,7 @@ class ingreso_datos:
       
 
         #Llamada al menu problema
-        menu_problema(self.ventana)   
-
+        menu_problema(self.ventana)
 
         self.etiquetas_datos()
 
@@ -107,7 +106,7 @@ class ingreso_datos:
         soluciones = mochila.get_soluciones()
         pesos_sol = mochila.get_pesos_sol()
         utilidad_sol = mochila.get_utilidad_neta()
-
+        self.ventana.destroy()
         self.generar_ventana_solucion(soluciones, pesos_sol, utilidad_sol)
 
 #Creacion de otras Ventanas
