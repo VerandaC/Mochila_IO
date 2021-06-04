@@ -2,12 +2,12 @@ from Mochila import Mochila
 from Item import Item
 ## Introduccion de datos al problema
 ## Atributos de item: nombre, peso, utilidad
-items = [Item('Producto 1', 4, 5),
-        Item('Producto 2', 4, 5),
-        Item('Producto 3', 4, 5)]
-
+items = [Item('Producto 1', 2, 3),
+        Item('Producto 2', 4, 3),
+        Item('Producto 3', 2, 3)]
+capacidad = 38
 ##  Creacion de la mochila, parametros: capacidad, lista de items
-mochila = Mochila(19, items)
+mochila = Mochila(capacidad, items)
 
 ## Resolucion del problema
 mochila.crear_etapas()

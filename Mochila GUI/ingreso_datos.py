@@ -1,16 +1,12 @@
 from tkinter import *
-from tkinter.scrolledtext import ScrolledText
-# from tkinter import scrolledtext as st
-# from principal import principal
 from menu_problema import menu_problema
-from solucion import solucion
+from resultado import solucion
 
 
 class ingreso_datos:
     def __init__(self,cant,cap):
         self.cant = cant
         self.cap = cap
-        # a=nuevo_problema
 
         # Creacion de la ventana problema
         self.x=420
@@ -30,42 +26,28 @@ class ingreso_datos:
         self.ventana.geometry(f'{self.x}x{self.y}+{self.x1}+{self.y1}')
         self.ventana.resizable(0,0)
         self.ventana.title("Asignacion caso mochila")
-        
+        self.ventana.config(bg="linen")
       
 
         #Llamada al menu problema
-        menu_problema(self.ventana) # Veremos  
-         
+        menu_problema(self.ventana)   
 
-        #Creacion del marco etiquetas
-        self.etiquetas_problema = Frame(self.ventana)
+
         self.etiquetas_datos()
-        self.etiquetas_problema.pack(side = TOP)
-
- 
 
         # Creacion del marco matriz
-        self.matriz_problema = Listbox(self.ventana)
+        self.matriz_problema = Frame(self.ventana)
         self.genera_matriz()
         self.matriz_problema.pack()
 
-        
-
-        #Creacion del marco botones
-        self.botones= Frame(self.ventana)
-        self.botones.pack(side=BOTTOM)
-
         #Boton cancelar
-        self.cancelar=Button(self.botones, text="Cancelar",command=self.cancelar)
-        self.cancelar.grid(column=0,row=2,padx=4,pady=4)
+        self.cancelar=Button(self.ventana, text="Cancelar",command=self.cancelar,bg="lavender")
+        self.cancelar.pack(side=LEFT,padx=65,pady=15)
         
 
         #Boton correr
-        # self.ok=Button(self.botones, text="Correr",command=self.generar_ventana_solucion)
-        self.ok=Button(self.botones, text="Correr",command=self.get_datos_tabla)
-        self.ok.grid(column=5,row=2,padx=4,pady=4)
-
-        
+        self.ok=Button(self.ventana, text="Correr",command=self.get_datos_tabla,bg="lavender")
+        self.ok.pack(side=RIGHT,padx=70,pady=15)
 
 
         self.ventana.mainloop()
@@ -80,14 +62,13 @@ class ingreso_datos:
                 celda.grid(padx=5, pady=5, row=r, column=c)
                 celda.insert(0, '({}, {})'.format(r, c))
                 celda.config(fg="white",    # letras
-                            bg="skyblue3",   # fondo
+                            bg="skyblue",   # fondo
                             font=("Verdana",12))
                 fila.append(celda)
             self.matriz.append(fila)
 
     
     def generar_ventana_solucion(self):
-        # self.ventana.destroy()
         print("self cantidad ",self.cant)
         solucion(4,self.cant,4,8)
         
@@ -116,13 +97,13 @@ class ingreso_datos:
 
     def etiquetas_datos(self):
 
-        self.etq_capacidad=Label(self.etiquetas_problema, text=f'Capacidad de la mochila : {self.cap}')
-        self.etq_capacidad.grid(column=0,row=0,padx=4,pady=4)
+        self.etq_capacidad=Label(self.ventana, text=f'Capacidad de la mochila : {self.cap}',bg="linen")
+        self.etq_capacidad.pack(side=TOP)
         
-        self.etq_cantidad=Label(self.etiquetas_problema, text=f'Cantidad de articulos : {self.cant}')
-        self.etq_cantidad.grid(column=0,row=1,padx=4,pady=4)
+        self.etq_cantidad=Label(self.ventana, text=f'Cantidad de articulos : {self.cant}',bg="linen")
+        self.etq_cantidad.pack(side=TOP)
 
-        self.etq_datos=Label(self.etiquetas_problema, text="      Articulos                Peso                     Utilidad")
-        self.etq_datos.grid(column=0,row=2,padx=4,pady=4)
+        self.etq_datos=Label(self.ventana, text="      Articulos                Peso                     Utilidad",bg="linen")
+        self.etq_datos.pack(side=TOP)
 
     

@@ -1,12 +1,11 @@
 from tkinter import *
-from tkinter.scrolledtext import ScrolledText
-# import tkinter
 from nuevo_problema import *
 from menu_problema import *
 
 a=("a","b","c","d","e","1","2","3","f","4","5","6","g","7","8","9","3","f","4","5","6","g","7","8","9")
 class solucion:
     def __init__(self,sol,cant,util,peso):
+       
         # Creacion de la ventana solucion
         self.sol=sol
         self.cant=cant
@@ -29,14 +28,13 @@ class solucion:
         solucion.geometry(f'{self.x}x{self.y}+{self.x1}+{self.y1}')
         solucion.resizable(0,0)
         solucion.title("Asignacion caso mochila")
+        solucion.config(bg="linen")
 
 
-        self.lista = Listbox(solucion)
+        # self.lista = Listbox(solucion)
         
-        b1=Button(self.lista, text="anterior")
-        # b1.grid(column=0,row=4,padx=4,pady=4)
-        b2=Button(self.lista, text="siguiente")
-        # b2.grid(column=0,row=4,padx=4,pady=4)
+        b1=Button(solucion, text="anterior",bg="lavender")
+        b2=Button(solucion, text="siguiente",bg="lavender")
 
         #Llamada al menu problema
         menu_problema(solucion)
@@ -45,17 +43,15 @@ class solucion:
 
         #Creacion de la funcion que genera las matrices solucion
         def soluciones():
-            etiqueta_sol=Label(self.lista, text=f'Solucion: {1} \nUtilidad total de las soluciones: {self.util} \nProducto         Cantidad           Peso           Utilidad')
-            matriz = Text(self.lista)
-            # self.lista.insert("end","\n \n \n")
+            etiqueta_sol=Label(solucion, text=f'Solucion: {1} \nUtilidad total de las soluciones: {self.util} \nProducto         Cantidad           Peso           Utilidad',bg="linen")
+            matriz = Frame(solucion)
             genera_matriz(a,matriz)
-            # self.lista.insert("end","\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n")
-            etiqueta_peso =Label(self.lista,text=f'Peso total utilidad: {self.peso}')
+            etiqueta_peso =Label(solucion,text=f'Peso total utilidad: {self.peso}',bg="linen")
             etiqueta_sol.pack()
             matriz.pack()
             etiqueta_peso.pack()
-            b1.pack(side=LEFT)
-            b2.pack(side=RIGHT)
+            b1.pack(side=LEFT,padx=65,pady=15)
+            b2.pack(side=RIGHT,padx=70,pady=15)
                 
                 
 
@@ -74,8 +70,6 @@ class solucion:
         
         soluciones()
         
-        self.lista.pack(fill="both",expand=True)    
 
         solucion.mainloop()
 
-# solucion=solucion()

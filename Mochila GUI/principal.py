@@ -17,6 +17,7 @@ class principal:
         self.principal.geometry(f'{ancho}x{alto}+{x}+{y}')
         self.principal.resizable(0,0)
         self.principal.title("Ventana principal")
+        self.principal.config(bg="linen")
 
         # Creacion de la barra de menus
         self.barra_menu = Menu(self.principal)
@@ -40,6 +41,8 @@ class principal:
 
         self.principal.mainloop()
 
+
+    #Creacion de otras funciones
     def abrir_nuevo(self):
         self.principal.destroy()
         nuevo_problema()

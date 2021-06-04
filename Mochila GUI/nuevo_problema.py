@@ -45,13 +45,10 @@ class nuevo_problema:
 
     #Creacion de otras Ventanas
     def cancelar(self):
-        # print('muestra ventana principal')
-        # principal()
         self.ventana.destroy()
             
 
     def generar_ingreso_datos(self):
-        # self.ventana.destroy()
         cantidad = self.caja_cantidad.get()
         capacidad = self.caja_capacidad.get()
         print('CANTIDAD ', cantidad)
