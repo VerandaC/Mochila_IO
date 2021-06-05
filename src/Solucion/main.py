@@ -1,6 +1,7 @@
 from Item import Item
 from Mochila import Mochila
 from random import randint
+from PDF import generarPDF
 
 # Item(nombre, peso, beneficio)
 items1 = [Item('Aceite', 1, 8),
@@ -33,6 +34,7 @@ mochila = Mochila(18, items5)
 mochila.crear_etapas()
 mochila.resolver()
 mochila.print_solucion()
+generarPDF("Soluion1.pdf",mochila.get_formulacion_problema(),mochila.get_soluciones(),mochila.get_utilidad_neta())
 
 def encontrar_problema_sol_multiple():
     flag = True
